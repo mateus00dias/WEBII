@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="Front/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Faça seu login<br>E entre para o nosso time</h1>
+            <img src="Front/img/img.png" class="left-login-img" alt="Animação">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>Login</h1>
+                <div class="textfield">
+                    <label for="NomeUsuario">Nome de Usuário:</label>
+                    <input type="text" id="NomeUsuario" name="NomeUsuario" required>
+                </div>
+                <div class="textfield">
+                    <label for="Senha">Senha:</label>
+                    <input type="password" id="Senha" name="Senha" required>
+                </div>
+                <button class="btn-login" type="button" onclick="realizarLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+
+</html>

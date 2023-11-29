@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/cadastro.css">
+    <title>Cadastro/Edição de Venda</title>
+</head>
+<body>
+    <h1>Cadastro/Edição de Venda</h1>
+    <form id="venda-form">
+        <label for="id_cliente">ID do Cliente:</label>
+        <input type="text" id="id_cliente" name="id_cliente" required>
+
+        <label for="id_carro">ID do Carro:</label>
+        <input type="text" id="id_carro" name="id_carro" required>
+
+        <label for="id_usuario">ID do Usuário:</label>
+        <input type="text" id="id_usuario" name="id_usuario" required>
+
+        <label for="data_venda">Data da Venda:</label>
+        <input type="date" id="data_venda" name="data_venda" required>
+
+        <label for="valor_venda">Valor da Venda:</label>
+        <input type="text" id="valor_venda" name="valor_venda" required>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <button onclick="window.location.href = 'lista_vendas.html';">Voltar para a Lista</button>
+    <button onclick="window.location.href = '../index.html';">Home</button>
+
+    <script>
+        document.getElementById('venda-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const cliente = document.getElementById('id_cliente').value;
+            const carro = document.getElementById('id_carro').value;
+            const usuario = document.getElementById('id_usuario').value;
+            const data = document.getElementById('data_venda').value;
+            const preco = document.getElementById('valor_venda').value;
+
+            const vendaData = {
+                ID_Cliente: cliente,
+                ID_Carro: carro,
+                ID_Usuario: usuario,
+                DataVenda: data,
+                ValorVenda: preco,
+            };
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const vendaId = urlParams.get('id');
+
+            try {
+                if (vendaId) {
+                    // Editar venda existente
+                    const response = await fetch(`http://localhost:3000/vendas/${vendaId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(vendaData),
+                    });
+
+                    if (response.ok) {
+                        alert('Venda atualizada com sucesso');
+                    } else {
+                        const errorMessage = await response.text();
+                        throw new Error(`Erro ao atualizar venda: ${errorMessage}`);
+                    }
+                } else {
+                    // Criar nova venda
+                    const response = await fetch('http://localhost:3000/vendas', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(vendaData),
+                    });
+
+                    if (response.ok) {
+                        alert('Venda criada com sucesso');
+                    } else {
+                        const errorMessage = await response.text();
+                        throw new Error(`Erro ao criar venda: ${errorMessage}`);
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Erro ao processar a venda. Consulte o console para obter mais informações.');
+            }
+        });
+    </script>
+</body>
+</html>
