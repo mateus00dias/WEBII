@@ -3,7 +3,7 @@ async function realizarLogin() {
     const senha = document.getElementById('Senha').value;
 
     try {
-        const response = await fetch('http://localhost:3000/usuarios/login', {
+        const response = await fetch('http://localhost:3001/usuarios/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
