@@ -1,10 +1,9 @@
-const mysql = require('mysql2');
+const { Pool } = require('pg');
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'dickin',
-    password: 'root123'
+// Configuração da pool de conexões com o PostgreSQL usando a URL de conexão
+const pool = new Pool({
+    connectionString: 'postgresql://webii_user:QbT099JrYsYQqSLobSyynYAuKpLcQQjl@dpg-cqtpuvlds78s739rl6o0-a/webii'
 });
 
-module.exports = pool.promise();
+// Exporta a pool de conexões para ser usada em outras partes da aplicação
+module.exports = pool;
